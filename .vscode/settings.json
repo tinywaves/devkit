@@ -1,10 +1,11 @@
 {
   "cSpell.words": [
-    "devkit",
     "bidichk",
+    "devkit",
     "errchkjson",
     "gocheckcompilerdirectives",
     "gocritic",
+    "gofmt",
     "goimports",
     "goprintffuncname",
     "gosec",
