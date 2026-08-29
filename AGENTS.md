@@ -30,6 +30,16 @@ All implementations should be designed for CLI use. Commands must be clear, beha
 - Do not introduce a large package, a complex dependency tree, or a high maintenance burden for a small feature. The benefit of a dependency must clearly outweigh its cost.
 - Keep implementations simple, maintain clear module boundaries, and provide useful error messages for user-visible failures.
 
+## Package Layout
+
+- Keep executable entry points under `cmd/<binary>` small. They should wire dependencies, execute the application, report terminal errors, and avoid containing command business logic.
+- Assemble the Devkit root command in `internal/app`.
+- Put each top-level user-facing CLI command in its own package under `internal/commands`. Use a clear package suffix such as `initcmd` when the command name conflicts with a Go keyword or would otherwise be ambiguous.
+- Keep sub-flows that only belong to one command inside that command package. Extract a separate internal package only when logic or data is genuinely shared or forms an independent domain boundary.
+- Keep reusable runtime version types, embedded version data, and loading logic in `internal/runtime`. Treat `internal/runtime/data/versions.json` as checked-in data, not user configuration.
+- Keep maintenance executables, such as the runtime snapshot updater, as separate binaries under `cmd` rather than exposing them as user-facing Devkit commands.
+- Keep tests beside the package they verify. Test command packages directly, and keep a small assembly test for the root command.
+
 ## Third-Party Package Selection
 
 Conduct thorough research before introducing any third-party Go package. Do not select a package based on assumptions or a single metric.

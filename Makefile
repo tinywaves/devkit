@@ -2,7 +2,7 @@ APP_NAME := devkit
 VERSION ?= $(shell git describe --tags --match 'v*' --abbrev=0 2>/dev/null || echo dev)
 LDFLAGS := -s -w -X main.version=$(VERSION)
 
-.PHONY: help fmt lint test test-race vet mod-verify check prek install-hooks build release-patch release-minor release-major
+.PHONY: help fmt lint test test-race vet mod-verify check prek install-hooks update-runtime build release-patch release-minor release-major
 
 help:
 	@printf '%-28s%s\n' \
@@ -15,6 +15,7 @@ help:
 		'make check' 'Run formatting, tests, vet, and module checks' \
 		'make prek' 'Run prek hooks against all files' \
 		'make install-hooks' 'Install prek Git hooks' \
+		'make update-runtime' 'Refresh checked-in Node.js and pnpm versions' \
 		'make build' 'Build the CLI' \
 		'make release-patch' 'Create and push the next patch release' \
 		'make release-minor' 'Create and push the next minor release' \
@@ -48,6 +49,9 @@ prek:
 
 install-hooks:
 	prek install
+
+update-runtime:
+	go run ./cmd/update-runtime
 
 build:
 	go build -trimpath -ldflags "$(LDFLAGS)" -o "$(APP_NAME)" ./cmd/devkit

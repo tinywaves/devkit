@@ -1,0 +1,41 @@
+{
+  "node": [
+    {
+      "version": "26.8.1",
+      "lts": true
+    },
+    {
+      "version": "25.9.0"
+    },
+    {
+      "version": "24.20.0",
+      "lts": true
+    },
+    {
+      "version": "23.11.1"
+    },
+    {
+      "version": "22.23.2",
+      "lts": true
+    },
+    {
+      "version": "21.7.3"
+    },
+    {
+      "version": "20.20.2",
+      "lts": true
+    },
+    {
+      "version": "19.9.0"
+    },
+    {
+      "version": "18.20.8",
+      "lts": true
+    }
+  ],
+  "pnpm": [
+    "12.1.0",
+    "11.25.0",
+    "10.34.5"
+  ]
+}

@@ -2,12 +2,15 @@ module github.com/tinywaves/devkit
 
 go 1.27.0
 
-require github.com/spf13/cobra v1.10.2
+require (
+	github.com/Masterminds/semver/v3 v3.5.0
+	github.com/spf13/cobra v1.10.2
+	github.com/yarlson/tap v0.13.1
+)
 
 require (
 	charm.land/fang/v2 v2.0.1 // indirect
 	charm.land/lipgloss/v2 v2.0.1 // indirect
-	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/caarlos0/go-version v0.2.2 // indirect
 	github.com/caarlos0/svu/v3 v3.4.1 // indirect
 	github.com/charmbracelet/colorprofile v0.4.2 // indirect
@@ -24,7 +27,9 @@ require (
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.3.0 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.20 // indirect
+	github.com/mattn/go-tty v0.0.7 // indirect
 	github.com/muesli/cancelreader v0.2.2 // indirect
 	github.com/muesli/mango v0.1.0 // indirect
 	github.com/muesli/mango-cobra v1.2.0 // indirect
@@ -43,6 +48,7 @@ require (
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.42.0 // indirect
+	golang.org/x/term v0.38.0 // indirect
 	golang.org/x/text v0.28.0 // indirect
 )
 
