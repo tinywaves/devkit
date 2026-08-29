@@ -1,0 +1,13 @@
+default_install_hook_types = ["pre-commit"]
+
+[[repos]]
+repo = "local"
+
+[[repos.hooks]]
+id = "project-checks"
+name = "project checks"
+language = "system"
+entry = "make"
+args = ["check"]
+pass_filenames = false
+stages = ["pre-commit"]

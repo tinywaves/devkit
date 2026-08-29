@@ -3,16 +3,22 @@
     "bidichk",
     "devkit",
     "errchkjson",
+    "goarch",
     "gocheckcompilerdirectives",
     "gocritic",
     "gofmt",
+    "gofumpt",
     "goimports",
+    "golangci",
     "goprintffuncname",
     "gosec",
     "govet",
+    "govulncheck",
+    "ldflags",
     "noctx",
     "nolintlint",
     "perfsprint",
+    "prek",
     "recvcheck",
     "thelper",
     "tparallel",
@@ -27,7 +33,11 @@
       "source.organizeImports": "explicit"
     }
   },
-  "go.formatTool": "default",
+  "go.formatTool": "custom",
+  "go.alternateTools": {
+    "customFormatter": "golangci-lint"
+  },
+  "go.formatFlags": ["fmt", "--stdin"],
   "go.lintTool": "golangci-lint",
   "go.lintOnSave": "package",
   "go.lintFlags": ["--path-mode=abs"]

@@ -11,6 +11,16 @@ Devkit is a CLI application written in Go. It is designed to:
 
 All implementations should be designed for CLI use. Commands must be clear, behavior must be predictable, errors must be actionable, and cross-platform compatibility should be considered.
 
+## Repository Workflow
+
+- Keep the root-level `Makefile` as the single entry point for local formatting, tests, verification, builds, and releases. Do not add both `Makefile` and `makefile`.
+- Keep local checks reproducible with the commands defined in `Makefile`; avoid adding a command that depends on an undocumented global executable when a project-managed or CI-managed alternative is available.
+- Keep CI responsibilities in `.github/workflows/ci.yml` and release responsibilities in `.github/workflows/release.yml`.
+- The release workflow uses the open-source GoReleaser distribution. Run `go mod verify` as an explicit workflow step rather than using GoReleaser Pro-only global hooks.
+- Use `prek.toml` only as the Git hook integration. The pre-commit hook should invoke `make check`; do not duplicate project checks or lint rules inside `prek`.
+- Keep `make lint` as the single local entry point for Go formatting and golangci-lint, and keep `make check` as the complete local quality gate that includes `make lint`.
+- Treat `devkit`, `dist/`, and `coverage.out` as generated outputs; do not commit them.
+
 ## Go Development Guidelines
 
 - This is a Go project. New code must follow official Go conventions and be formatted with `gofmt`.
