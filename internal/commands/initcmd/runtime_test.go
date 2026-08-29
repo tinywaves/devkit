@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestInitializeJSTSRuntimeUsesConfiguredVersions(t *testing.T) {
+func TestInitializeJSToolchainUsesConfiguredVersions(t *testing.T) {
 	workdir := t.TempDir()
 	packagePath := filepath.Join(workdir, packageJSONName)
 	if err := os.WriteFile(packagePath, []byte("{\"name\":\"example\",\"scripts\":{\"test\":\"go test\"}}\n"), 0o640); err != nil {

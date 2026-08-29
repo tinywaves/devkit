@@ -26,11 +26,11 @@ type nodeVersion = runtimeconfig.NodeVersion
 
 var configuredRuntimeVersions = runtimeconfig.Versions()
 
-func initializeJSTSRuntime(ctx context.Context, input io.Reader, output io.Writer, workdir string) error {
+func initializeJSToolchain(ctx context.Context, input io.Reader, output io.Writer, workdir string) error {
 	packagePath := filepath.Join(workdir, packageJSONName)
 	if _, err := os.Stat(packagePath); err != nil {
 		if os.IsNotExist(err) {
-			fmt.Fprintln(output, "package.json not found; skipping js/ts runtime initialization")
+			fmt.Fprintln(output, "package.json not found; skipping JavaScript / TypeScript initialization")
 			return nil
 		}
 		return fmt.Errorf("check %s: %w", packageJSONName, err)
@@ -65,12 +65,12 @@ func initializeInteractiveInit(ctx context.Context, input io.Reader, output io.W
 	if err != nil {
 		return err
 	}
-	if target.name != "js/ts-runtime" {
+	if target.name != "js" {
 		fmt.Fprintln(output, "Initializing", target.label, "(placeholder)")
 		return nil
 	}
 	if !hasPackageJSON {
-		fmt.Fprintln(output, "package.json not found; skipping js/ts runtime initialization")
+		fmt.Fprintln(output, "package.json not found; skipping JavaScript / TypeScript initialization")
 		return nil
 	}
 

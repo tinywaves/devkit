@@ -4,23 +4,20 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"slices"
 	"strings"
 
 	"github.com/spf13/cobra"
 )
 
 type initTarget struct {
-	name    string
-	label   string
-	aliases []string
+	name  string
+	label string
 }
 
 var initTargets = []initTarget{
 	{
-		name:    "js/ts-runtime",
-		label:   "js/ts runtime",
-		aliases: []string{"js/ts", "js-ts", "js-ts-runtime", "runtime"},
+		name:  "js",
+		label: "JavaScript / TypeScript",
 	},
 	{
 		name:  "eslint",
@@ -30,7 +27,7 @@ var initTargets = []initTarget{
 
 func NewCommand(input io.Reader) *cobra.Command {
 	command := &cobra.Command{
-		Use:   "init [js/ts-runtime|eslint]",
+		Use:   "init [js|eslint]",
 		Short: "Initialize project tooling",
 		Args:  validateInitArgs,
 	}
@@ -50,12 +47,12 @@ func NewCommand(input io.Reader) *cobra.Command {
 			return err
 		}
 
-		if target.name == "js/ts-runtime" {
+		if target.name == "js" {
 			workdir, err := os.Getwd()
 			if err != nil {
 				return fmt.Errorf("get current directory: %w", err)
 			}
-			return initializeJSTSRuntime(command.Context(), input, command.OutOrStdout(), workdir)
+			return initializeJSToolchain(command.Context(), input, command.OutOrStdout(), workdir)
 		}
 
 		fmt.Fprintln(command.OutOrStdout(), "Initializing", target.label, "(placeholder)")
@@ -66,10 +63,7 @@ func NewCommand(input io.Reader) *cobra.Command {
 }
 
 func validateInitArgs(_ *cobra.Command, args []string) error {
-	if len(args) > 2 {
-		return fmt.Errorf("accepts at most one initializer name")
-	}
-	if len(args) == 2 && !strings.EqualFold(strings.Join(args, " "), "js/ts runtime") {
+	if len(args) > 1 {
 		return fmt.Errorf("accepts at most one initializer name")
 	}
 	return nil
@@ -78,13 +72,10 @@ func validateInitArgs(_ *cobra.Command, args []string) error {
 func findInitTarget(value string) (initTarget, error) {
 	normalized := strings.ToLower(strings.TrimSpace(value))
 	for _, target := range initTargets {
-		if normalized == target.name || normalized == target.label {
-			return target, nil
-		}
-		if slices.Contains(target.aliases, normalized) {
+		if normalized == target.name {
 			return target, nil
 		}
 	}
 
-	return initTarget{}, fmt.Errorf("unknown initializer %q; choose js/ts-runtime or eslint", value)
+	return initTarget{}, fmt.Errorf("unknown initializer %q; choose js or eslint", value)
 }

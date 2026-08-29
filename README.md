@@ -94,11 +94,11 @@ devkit init
 Or select an initializer directly:
 
 ```sh
-devkit init js/ts-runtime
+devkit init js
 devkit init eslint
 ```
 
-The `js/ts-runtime` initializer only runs in a directory containing `package.json`. It uses the configured Node.js and pnpm version snapshots, then writes the selected versions to `packageManager` and `devEngines` without requiring network access.
+The `js` initializer configures the JavaScript/TypeScript toolchain for any project containing `package.json`, including frontend and Node.js projects. It uses the configured Node.js and pnpm version snapshots, then writes the selected versions to `packageManager` and `devEngines` without requiring network access.
 
 ### Runtime Version Snapshots
 
