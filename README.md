@@ -4,6 +4,28 @@ Devkit is a Go-based CLI for automating project setup and local development envi
 
 It provides a consistent entry point for tasks that would otherwise require repeatedly copying templates, downloading tools, or editing configuration files by hand.
 
+## Installation
+
+Install the latest release on macOS or Linux:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/tinywaves/devkit/main/scripts/install.sh | bash
+```
+
+The installer detects the operating system and CPU architecture, downloads the matching GoReleaser archive, verifies it with `checksums.txt`, and installs `devkit` to `~/.local/bin/devkit` by default.
+
+Install a specific version by setting `DEVKIT_VERSION`:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/tinywaves/devkit/main/scripts/install.sh | DEVKIT_VERSION=v0.0.0 bash
+```
+
+Override the installation directory with `DEVKIT_PREFIX`:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/tinywaves/devkit/main/scripts/install.sh | DEVKIT_PREFIX="$HOME/.local" bash
+```
+
 ## What Devkit Does
 
 - Initialize projects and generate project scaffolding.

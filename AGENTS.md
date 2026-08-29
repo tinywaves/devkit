@@ -19,6 +19,7 @@ All implementations should be designed for CLI use. Commands must be clear, beha
 - The release workflow uses the open-source GoReleaser distribution. Run `go mod verify` as an explicit workflow step rather than using GoReleaser Pro-only global hooks.
 - Use `prek.toml` only as the Git hook integration. The pre-commit hook should invoke `make check`; do not duplicate project checks or lint rules inside `prek`.
 - Keep `make lint` as the single local entry point for Go formatting and golangci-lint, and keep `make check` as the complete local quality gate that includes `make lint`.
+- Keep `scripts/install.sh` aligned with the archive names and supported targets in `.goreleaser.yaml`; verify downloaded archives with `checksums.txt` before installation.
 - Treat `devkit`, `dist/`, and `coverage.out` as generated outputs; do not commit them.
 
 ## Go Development Guidelines
